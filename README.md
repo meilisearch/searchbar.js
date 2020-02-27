@@ -1,3 +1,5 @@
 # searchbar.js
 
-Work in progress
+A general front-end search bar using MeiliSearch.
+
+WIP
