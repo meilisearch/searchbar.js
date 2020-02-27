@@ -1,0 +1,92 @@
+[
+  {
+    "hierarchy_lvl0": "Ruby",
+    "hierarchy_lvl1": "API",
+    "hierarchy_lvl2": "Search",
+    "hierarchy_lvl3": null,
+    "hierarchy_lvl4": null,
+    "hierarchy_lvl5": null,
+    "content": "Search with Ruby API",
+    "_formatted": {
+      "hierarchy_lvl0": "Ruby",
+      "hierarchy_lvl1": "API",
+      "hierarchy_lvl2": "Search",
+      "hierarchy_lvl3": null,
+      "hierarchy_lvl4": null,
+      "hierarchy_lvl5": null,
+      "content": "<mark>Search</mark> with Ruby API"
+    }
+  },
+  {
+    "hierarchy_lvl0": "PHP",
+    "hierarchy_lvl1": "Wordpress",
+    "hierarchy_lvl2": "Indexing",
+    "hierarchy_lvl3": null,
+    "hierarchy_lvl4": null,
+    "hierarchy_lvl5": null,
+    "content": "Indexing in Wordpress with PHP",
+    "_formatted": {
+      "hierarchy_lvl0": "PHP",
+      "hierarchy_lvl1": "Wordpress",
+      "hierarchy_lvl2": "<mark>Indexing</mark>",
+      "hierarchy_lvl3": null,
+      "hierarchy_lvl4": null,
+      "hierarchy_lvl5": null,
+      "content": "<mark>Indexing</mark> in Wordpress with PHP"
+    }
+  },
+  {
+    "hierarchy_lvl0": "Go",
+    "hierarchy_lvl1": "API",
+    "hierarchy_lvl2": "Geosearch",
+    "hierarchy_lvl3": null,
+    "hierarchy_lvl4": null,
+    "hierarchy_lvl5": null,
+    "content": "Doing geosearch with the API in Go",
+    "_formatted": {
+      "hierarchy_lvl0": "Go",
+      "hierarchy_lvl1": "API",
+      "hierarchy_lvl2": "<mark>Geosearch</mark>",
+      "hierarchy_lvl3": null,
+      "hierarchy_lvl4": null,
+      "hierarchy_lvl5": null,
+      "content": "Doing <mark>geosearch</mark> with the API in Go",
+    }
+  },
+  {
+    "hierarchy_lvl0": "Ruby",
+    "hierarchy_lvl1": "API",
+    "hierarchy_lvl2": "Geosearch",
+    "hierarchy_lvl3": null,
+    "hierarchy_lvl4": null,
+    "hierarchy_lvl5": null,
+    "content": "Doing geosearch with the API in Ruby",
+    "_formatted": {
+      "hierarchy_lvl0": "Ruby",
+      "hierarchy_lvl1": "API",
+      "hierarchy_lvl2": "<mark>Geosearch</mark>",
+      "hierarchy_lvl3": null,
+      "hierarchy_lvl4": null,
+      "hierarchy_lvl5": null,
+      "content": "Doing <mark>geosearch</mark> with the API in Ruby",
+    }
+  },
+  {
+    "hierarchy_lvl0": "PHP",
+    "hierarchy_lvl1": "Magento",
+    "hierarchy_lvl2": null,
+    "hierarchy_lvl3": null,
+    "hierarchy_lvl4": null,
+    "hierarchy_lvl5": null,
+    "content": "Searching in Magento with PHP",
+    "_formatted": {
+      "hierarchy_lvl0": "PHP",
+      "hierarchy_lvl1": "Magento",
+      "hierarchy_lvl2": null,
+      "hierarchy_lvl3": null,
+      "hierarchy_lvl4": null,
+      "hierarchy_lvl5": null,
+      "content": "Searching in <mark>Magento</mark> with PHP"
+    }
+  }
+]
