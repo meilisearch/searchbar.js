@@ -7,7 +7,7 @@ import Meili from 'meilisearch';
 
 /**
  * Adds an autocomplete dropdown to an input field
- * @function DocsSearchBar
+ * @function SearchBar
  * @param  {string} options.meilisearchHostUrl    URL where MeiliSearch instance is hosted
  * @param  {string} options.apiKey                Read-only API key
  * @param  {string} options.indexUid              UID of the index to target
@@ -25,7 +25,7 @@ const usage = `Usage:
   [ meilisearchOptions.{limit} ]
   [ autocompleteOptions.{hint,debug} ]
 })`;
-class DocsSearchBar {
+class SearchBar {
   constructor({
     meilisearchHostUrl,
     apiKey,
@@ -45,7 +45,7 @@ class DocsSearchBar {
     enhancedSearchInput = false,
     layout = 'columns',
   }) {
-    DocsSearchBar.checkArguments({
+    SearchBar.checkArguments({
       meilisearchHostUrl,
       apiKey,
       indexUid,
@@ -64,7 +64,7 @@ class DocsSearchBar {
     this.apiKey = apiKey;
     this.meilisearchHostUrl = meilisearchHostUrl;
     this.indexUid = indexUid;
-    this.input = DocsSearchBar.getInputFromSelector(inputSelector);
+    this.input = SearchBar.getInputFromSelector(inputSelector);
     this.meilisearchOptions = {
       limit: 5,
       attributesToHighlight: ['*'],
@@ -103,16 +103,16 @@ class DocsSearchBar {
     });
 
     if (enhancedSearchInput) {
-      this.input = DocsSearchBar.injectSearchBox(this.input);
+      this.input = SearchBar.injectSearchBox(this.input);
     }
 
     this.autocomplete = autocomplete(this.input, autocompleteOptions, [
       {
         source: this.getAutocompleteSource(transformData, queryHook),
         templates: {
-          suggestion: DocsSearchBar.getSuggestionTemplate(this.isSimpleLayout),
+          suggestion: SearchBar.getSuggestionTemplate(this.isSimpleLayout),
           footer: templates.footer,
-          empty: DocsSearchBar.getEmptyTemplate(),
+          empty: SearchBar.getEmptyTemplate(),
         },
       },
     ]);
@@ -142,7 +142,7 @@ class DocsSearchBar {
     );
 
     if (enhancedSearchInput) {
-      DocsSearchBar.bindSearchBoxEvent();
+      SearchBar.bindSearchBoxEvent();
     }
   }
 
@@ -163,7 +163,7 @@ class DocsSearchBar {
       );
     }
 
-    if (!DocsSearchBar.getInputFromSelector(args.inputSelector)) {
+    if (!SearchBar.getInputFromSelector(args.inputSelector)) {
       throw new Error(
         `Error: No input element in the page matches ${args.inputSelector}`
       );
@@ -182,13 +182,13 @@ class DocsSearchBar {
 
   static bindSearchBoxEvent() {
     $('.searchbox [type="reset"]').on('click', function() {
-      $('input#docs-searchbar').focus();
+      $('input#searchbar').focus();
       $(this).addClass('hide');
       autocomplete.autocomplete.setVal('');
     });
 
-    $('input#docs-searchbar').on('keyup', () => {
-      const searchbox = document.querySelector('input#docs-searchbar');
+    $('input#searchbar').on('keyup', () => {
+      const searchbox = document.querySelector('input#searchbar');
       const reset = document.querySelector('.searchbox [type="reset"]');
       reset.className = 'searchbox__reset';
       if (searchbox.value.length === 0) {
@@ -240,7 +240,7 @@ class DocsSearchBar {
           if (transformData) {
             hits = transformData(hits) || hits;
           }
-          callback(DocsSearchBar.formatHits(hits));
+          callback(SearchBar.formatHits(hits));
         });
     };
   }
@@ -276,7 +276,7 @@ class DocsSearchBar {
 
     // Translate hits into smaller objects to be send to the template
     return groupedHits.map(hit => {
-      const url = DocsSearchBar.formatURL(hit);
+      const url = SearchBar.formatURL(hit);
       const category = utils.getHighlightedValue(hit, 'lvl0');
       const subcategory = utils.getHighlightedValue(hit, 'lvl1') || category;
       const displayTitle = utils
@@ -385,4 +385,4 @@ class DocsSearchBar {
   }
 }
 
-export default DocsSearchBar;
+export default SearchBar;

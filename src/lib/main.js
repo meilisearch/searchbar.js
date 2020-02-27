@@ -1,8 +1,8 @@
 import toFactory from 'to-factory';
-import DocsSearchBar from './DocsSearchBar';
+import SearchBar from './SearchBar';
 import version from './version';
 
-const docsSearchBar = toFactory(DocsSearchBar);
-docsSearchBar.version = version;
+const searchBar = toFactory(SearchBar);
+searchBar.version = version;
 
-export default docsSearchBar;
+export default searchBar;

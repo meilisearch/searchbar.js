@@ -185,12 +185,12 @@
         cursor: pointer;
 
         &.dsb-cursor {
-          .docs-searchbar-suggestion.suggestion-layout-simple {
+          .searchbar-suggestion.suggestion-layout-simple {
             background-color: rgba($main-color, 0.05);
           }
 
-          .docs-searchbar-suggestion:not(.suggestion-layout-simple) {
-            .docs-searchbar-suggestion--content {
+          .searchbar-suggestion:not(.suggestion-layout-simple) {
+            .searchbar-suggestion--content {
               background-color: rgba($main-color, 0.05);
             }
           }
@@ -213,7 +213,7 @@
     }
 
     // Each suggestion item is wrapped
-    .docs-searchbar-suggestion {
+    .searchbar-suggestion {
       display: block;
       position: relative;
       padding: 0 $padding/2;
@@ -234,18 +234,18 @@
         }
 
         &--category-header
-          .docs-searchbar-suggestion--category-header-lvl0
-          .docs-searchbar-suggestion--highlight,
+          .searchbar-suggestion--category-header-lvl0
+          .searchbar-suggestion--highlight,
         &--category-header
-          .docs-searchbar-suggestion--category-header-lvl1
-          .docs-searchbar-suggestion--highlight {
+          .searchbar-suggestion--category-header-lvl1
+          .searchbar-suggestion--highlight {
           padding: 0 0 1px;
           background: inherit;
           box-shadow: inset 0 -2px 0 0 rgba($main-color, 0.8);
           color: inherit;
         }
 
-        &--text .docs-searchbar-suggestion--highlight {
+        &--text .searchbar-suggestion--highlight {
           padding: 0 0 1px;
           background: inherit;
           box-shadow: inset 0 -2px 0 0 rgba($main-color, 0.8);
@@ -349,28 +349,28 @@
         background-color: $code-background;
         border-radius: 3px;
         font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
-        .docs-searchbar-suggestion--highlight {
+        .searchbar-suggestion--highlight {
           background: none;
         }
       }
 
       // Rules to display categories and subcategories
-      &.docs-searchbar-suggestion__main
-        .docs-searchbar-suggestion--category-header {
+      &.searchbar-suggestion__main
+        .searchbar-suggestion--category-header {
         display: block;
       }
 
-      &.docs-searchbar-suggestion__secondary {
+      &.searchbar-suggestion__secondary {
         display: block;
       }
 
       @media all and (min-width: #{$responsive-breakpoint}) {
-        .docs-searchbar-suggestion--subcategory-column {
+        .searchbar-suggestion--subcategory-column {
           display: block;
         }
       }
       @media all and (max-width: #{$responsive-breakpoint}) {
-        .docs-searchbar-suggestion--subcategory-column {
+        .searchbar-suggestion--subcategory-column {
           display: inline-block;
           width: auto;
           text-align: left;
@@ -389,7 +389,7 @@
             content: '|';
           }
         }
-        .docs-searchbar-suggestion--content {
+        .searchbar-suggestion--content {
           display: inline-block;
           width: auto;
           text-align: left;
@@ -405,13 +405,13 @@
 
     //Simple layout (no column)
     .suggestion-layout-simple {
-      &.docs-searchbar-suggestion {
+      &.searchbar-suggestion {
         border-bottom: solid 1px #eee;
         padding: $padding/2;
         margin: 0;
       }
 
-      .docs-searchbar-suggestion {
+      .searchbar-suggestion {
         &--content {
           width: 100%;
           padding: 0;
@@ -482,7 +482,7 @@
           font-size: $text-size;
           opacity: 0.8;
 
-          .docs-searchbar-suggestion--highlight {
+          .searchbar-suggestion--highlight {
             color: darken($text-color, 15%);
             font-weight: bold;
             box-shadow: none;
@@ -492,7 +492,7 @@
     }
 
     // powered by
-    .docs-searchbar-footer {
+    .searchbar-footer {
       width: 180px;
       height: 20px;
       z-index: 2000;
@@ -500,7 +500,7 @@
       float: right;
     }
 
-    .docs-searchbar-footer-logo {
+    .searchbar-footer-logo {
       margin-bottom: 4px;
     }
   }

@@ -1,4 +1,4 @@
-const prefix = 'docs-searchbar';
+const prefix = 'searchbar';
 const suggestionPrefix = `${prefix}-suggestion`;
 const footerPrefix = `${prefix}-footer`;
 
