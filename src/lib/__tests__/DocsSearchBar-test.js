@@ -3,10 +3,10 @@
 /* eslint-disable camelcase */
 import sinon from 'sinon';
 import $ from '../zepto';
-import DocsSearchBar from '../DocsSearchBar';
+import SearchBar from '../SearchBar';
 /**
  * Pitfalls:
- * Whenever you call new DocsSearchBar(), it will add the a new dropdown markup to
+ * Whenever you call new SearchBar(), it will add the a new dropdown markup to
  * the page. Because we are clearing the document.body.innerHTML between each
  * test, it usually is not a problem.
  * Except that autocomplete.js remembers internally how many times it has been
@@ -16,7 +16,7 @@ import DocsSearchBar from '../DocsSearchBar';
  * tests.
  **/
 
-describe('DocsSearchBar', () => {
+describe('SearchBar', () => {
   beforeEach(() => {
     // Note: If you edit this HTML while doing TDD with `npm run test:watch`,
     // you will have to restart `npm run test:watch` for the new HTML to be
@@ -53,18 +53,18 @@ describe('DocsSearchBar', () => {
         inputSelector: '#input',
       };
 
-      sinon.spy(DocsSearchBar, 'checkArguments');
-      sinon.stub(DocsSearchBar, 'getInputFromSelector').returns(true);
+      sinon.spy(SearchBar, 'checkArguments');
+      sinon.stub(SearchBar, 'getInputFromSelector').returns(true);
 
-      DocsSearchBar.__Rewire__('Meili', MeiliSearch);
-      DocsSearchBar.__Rewire__('autocomplete', AutoComplete);
+      SearchBar.__Rewire__('Meili', MeiliSearch);
+      SearchBar.__Rewire__('autocomplete', AutoComplete);
     });
 
     afterEach(() => {
-      DocsSearchBar.checkArguments.restore();
-      DocsSearchBar.getInputFromSelector.restore();
-      DocsSearchBar.__ResetDependency__('meilisearch');
-      DocsSearchBar.__ResetDependency__('autocomplete');
+      SearchBar.checkArguments.restore();
+      SearchBar.getInputFromSelector.restore();
+      SearchBar.__ResetDependency__('meilisearch');
+      SearchBar.__ResetDependency__('autocomplete');
     });
 
     it('should call checkArguments', () => {
@@ -72,17 +72,17 @@ describe('DocsSearchBar', () => {
       const options = defaultOptions;
 
       // When
-      new DocsSearchBar(options);
+      new SearchBar(options);
 
       // Then
-      expect(DocsSearchBar.checkArguments.calledOnce).toBe(true);
+      expect(SearchBar.checkArguments.calledOnce).toBe(true);
     });
     it('should pass main options as instance properties', () => {
       // Given
       const options = defaultOptions;
 
       // When
-      const actual = new DocsSearchBar(options);
+      const actual = new SearchBar(options);
 
       // Then
       expect(actual.meilisearchHostUrl).toEqual('https://test.getmeili.com');
@@ -99,7 +99,7 @@ describe('DocsSearchBar', () => {
       };
 
       // When
-      const actual = new DocsSearchBar(options);
+      const actual = new SearchBar(options);
 
       // Then
       expect(actual.meilisearchOptions).toEqual({
@@ -119,7 +119,7 @@ describe('DocsSearchBar', () => {
       };
 
       // When
-      const actual = new DocsSearchBar(options);
+      const actual = new SearchBar(options);
 
       // Then
       expect(actual.meilisearchOptions).toEqual({
@@ -132,10 +132,10 @@ describe('DocsSearchBar', () => {
     it('should pass the input element as an instance property', () => {
       // Given
       const options = defaultOptions;
-      DocsSearchBar.getInputFromSelector.returns($('<span>foo</span>'));
+      SearchBar.getInputFromSelector.returns($('<span>foo</span>'));
 
       // When
-      const actual = new DocsSearchBar(options);
+      const actual = new SearchBar(options);
 
       // Then
       const $inputs = actual.input;
@@ -151,7 +151,7 @@ describe('DocsSearchBar', () => {
       };
 
       // When
-      const actual = new DocsSearchBar(options);
+      const actual = new SearchBar(options);
 
       // Then
       expect(typeof actual.meilisearchOptions).toEqual('object');
@@ -172,7 +172,7 @@ describe('DocsSearchBar', () => {
       const options = defaultOptions;
 
       // When
-      new DocsSearchBar(options);
+      new SearchBar(options);
 
       // Then
       expect(MeiliSearch.calledOnce).toBe(true);
@@ -190,10 +190,10 @@ describe('DocsSearchBar', () => {
         autocompleteOptions: { anOption: '44' },
       };
       const $input = $('<input name="foo" />');
-      DocsSearchBar.getInputFromSelector.returns($input);
+      SearchBar.getInputFromSelector.returns($input);
 
       // When
-      new DocsSearchBar(options);
+      new SearchBar(options);
 
       // Then
       expect(AutoComplete.calledOnce).toBe(true);
@@ -215,7 +215,7 @@ describe('DocsSearchBar', () => {
       const options = { ...defaultOptions, handleSelected() {} };
 
       // When
-      new DocsSearchBar(options);
+      new SearchBar(options);
 
       // Then
       expect(autocomplete.on.calledTwice).toBe(true);
@@ -226,12 +226,12 @@ describe('DocsSearchBar', () => {
   describe('checkArguments', () => {
     let checkArguments;
     beforeEach(() => {
-      checkArguments = DocsSearchBar.checkArguments;
+      checkArguments = SearchBar.checkArguments;
     });
 
     afterEach(() => {
-      if (DocsSearchBar.getInputFromSelector.restore) {
-        DocsSearchBar.getInputFromSelector.restore();
+      if (SearchBar.getInputFromSelector.restore) {
+        SearchBar.getInputFromSelector.restore();
       }
     });
 
@@ -278,7 +278,7 @@ describe('DocsSearchBar', () => {
         apiKey: 'apiKey',
         indexUid: 'indexUID',
       };
-      sinon.stub(DocsSearchBar, 'getInputFromSelector').returns(false);
+      sinon.stub(SearchBar, 'getInputFromSelector').returns(false);
 
       // When
       expect(() => {
@@ -290,7 +290,7 @@ describe('DocsSearchBar', () => {
   describe('getInputFromSelector', () => {
     let getInputFromSelector;
     beforeEach(() => {
-      getInputFromSelector = DocsSearchBar.getInputFromSelector;
+      getInputFromSelector = SearchBar.getInputFromSelector;
     });
 
     it('should return null if no element matches the selector', () => {
@@ -328,7 +328,7 @@ describe('DocsSearchBar', () => {
   describe('getAutocompleteSource', () => {
     let client;
     let MeiliSearch;
-    let docsSearchBar;
+    let searchBar;
     beforeEach(() => {
       client = {
         meilisearch: 'client',
@@ -339,9 +339,9 @@ describe('DocsSearchBar', () => {
         }),
       };
       MeiliSearch = sinon.stub().returns(client);
-      DocsSearchBar.__Rewire__('Meili', MeiliSearch);
+      SearchBar.__Rewire__('Meili', MeiliSearch);
 
-      docsSearchBar = new DocsSearchBar({
+      searchBar = new SearchBar({
         meilisearchHostUrl: 'https://test.getmeili.com',
         indexUid: 'indexUID',
         apiKey: 'apiKey',
@@ -350,12 +350,12 @@ describe('DocsSearchBar', () => {
     });
 
     afterEach(() => {
-      DocsSearchBar.__ResetDependency__('meilisearch');
+      SearchBar.__ResetDependency__('meilisearch');
     });
 
     it('returns a function', () => {
       // Given
-      const actual = docsSearchBar.getAutocompleteSource();
+      const actual = searchBar.getAutocompleteSource();
 
       // When
 
@@ -366,7 +366,7 @@ describe('DocsSearchBar', () => {
     describe('the returned function', () => {
       it('calls the MeiliSearch client with the correct parameters', () => {
         // Given
-        const actual = docsSearchBar.getAutocompleteSource();
+        const actual = searchBar.getAutocompleteSource();
 
         // When
         actual('query');
@@ -392,7 +392,7 @@ describe('DocsSearchBar', () => {
     describe('when queryHook is used', () => {
       it('calls the MeiliSearch client with the correct parameters', () => {
         // Given
-        const actual = docsSearchBar.getAutocompleteSource(
+        const actual = searchBar.getAutocompleteSource(
           false,
           query => `${query} modified`
         );
@@ -432,7 +432,7 @@ describe('DocsSearchBar', () => {
       };
 
       // When
-      const dsb = new DocsSearchBar(options);
+      const dsb = new SearchBar(options);
       dsb.autocomplete.trigger('autocomplete:selected', {
         url: 'https://website.com/doc/page',
       });
@@ -465,7 +465,7 @@ describe('DocsSearchBar', () => {
       });
 
       // When
-      const dsb = new DocsSearchBar(options);
+      const dsb = new SearchBar(options);
       dsb.autocomplete.trigger('autocomplete:selected', {
         url: 'https://website.com/doc/page',
       });
@@ -490,7 +490,7 @@ describe('DocsSearchBar', () => {
       };
 
       // Building a dropdown with links inside
-      const dsb = new DocsSearchBar(options);
+      const dsb = new SearchBar(options);
       dsb.autocomplete.trigger('autocomplete:shown');
       const dataset = $('.meilisearch-autocomplete');
       const suggestions = $('<div class="dsb-suggestions"></div>');
@@ -521,7 +521,7 @@ describe('DocsSearchBar', () => {
         const mockSuggestion = { url: 'www.example.com' };
         const mockContext = { selectionMethod: 'enterKey' };
 
-        new DocsSearchBar(options).handleSelected(
+        new SearchBar(options).handleSelected(
           mockInput,
           undefined, // Event
           mockSuggestion,
@@ -548,7 +548,7 @@ describe('DocsSearchBar', () => {
         const mockInput = { setVal: mockSetVal };
         const mockContext = { selectionMethod: 'click' };
 
-        new DocsSearchBar(options).handleSelected(
+        new SearchBar(options).handleSelected(
           mockInput,
           undefined, // Event
           undefined, // Suggestion
@@ -576,7 +576,7 @@ describe('DocsSearchBar', () => {
       };
 
       // When
-      const dsb = new DocsSearchBar(options);
+      const dsb = new SearchBar(options);
 
       dsb.autocomplete.trigger('autocomplete:shown');
 
@@ -601,7 +601,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       // Then
       expect(input).not.toBe(actual);
@@ -636,7 +636,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       // Then
       expect(actual[0].isCategoryHeader).toEqual(true);
@@ -672,7 +672,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       // Then
       expect(actual[0].category).toEqual('Ruby');
@@ -709,7 +709,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       // Then
       expect(actual[0].isSubCategoryHeader).toEqual(true);
@@ -753,7 +753,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       // Then
       expect(actual[0].isSubCategoryHeader).toEqual(true);
@@ -779,7 +779,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       // Then
       expect(actual[0].category).toEqual('<mark>Ruby</mark>');
@@ -799,7 +799,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       // Then
       expect(actual[0].title).toEqual('Foo');
@@ -818,7 +818,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       // Then
       expect(actual[0].title).toEqual('API');
@@ -837,7 +837,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       // Then
       expect(actual[0].title).toEqual('Ruby');
@@ -856,7 +856,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       const separator =
         '<span class="aa-suggestion-title-separator" aria-hidden="true"> › </span>';
@@ -887,7 +887,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       const separator =
         '<span class="aa-suggestion-title-separator" aria-hidden="true"> › </span>';
@@ -913,7 +913,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       // Then
       expect(actual[0].text).toEqual('…lorem <mark>foo</mark> bar ipsum.');
@@ -935,7 +935,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       // Then
       expect(actual[0].url).toEqual('http://foo.bar/#anchor');
@@ -957,7 +957,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       // Then
       expect(actual[0].url).toEqual('http://foo.bar/#anchor');
@@ -978,7 +978,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       // Then
       expect(actual[0].url).toEqual(input[0].url);
@@ -999,7 +999,7 @@ describe('DocsSearchBar', () => {
       ];
 
       // When
-      const actual = DocsSearchBar.formatHits(input);
+      const actual = SearchBar.formatHits(input);
 
       // Then
       expect(actual[0].url).toEqual(`#${input[0].anchor}`);
@@ -1015,7 +1015,7 @@ describe('DocsSearchBar', () => {
       };
 
       // When
-      const actual = DocsSearchBar.formatURL(input);
+      const actual = SearchBar.formatURL(input);
 
       // Then
       expect(actual).toEqual('url#anchor');
@@ -1028,7 +1028,7 @@ describe('DocsSearchBar', () => {
       };
 
       // When
-      const actual = DocsSearchBar.formatURL(input);
+      const actual = SearchBar.formatURL(input);
 
       // Then
       expect(actual).toEqual('url');
@@ -1041,7 +1041,7 @@ describe('DocsSearchBar', () => {
       };
 
       // When
-      const actual = DocsSearchBar.formatURL(input);
+      const actual = SearchBar.formatURL(input);
 
       // Then
       expect(actual).toEqual('#anchor');
@@ -1055,7 +1055,7 @@ describe('DocsSearchBar', () => {
       };
 
       // When
-      const actual = DocsSearchBar.formatURL(input);
+      const actual = SearchBar.formatURL(input);
 
       // Then
       expect(actual).toEqual('url#anchor');
@@ -1066,7 +1066,7 @@ describe('DocsSearchBar', () => {
       const input = {};
 
       // When
-      const actual = DocsSearchBar.formatURL(input);
+      const actual = SearchBar.formatURL(input);
 
       // Then
       expect(actual).toEqual(null);
@@ -1077,7 +1077,7 @@ describe('DocsSearchBar', () => {
       const input = {};
 
       // When
-      DocsSearchBar.formatURL(input);
+      SearchBar.formatURL(input);
 
       // Then
       expect(window.console.warn.calledOnce).toBe(true);
@@ -1089,16 +1089,16 @@ describe('DocsSearchBar', () => {
       const templates = {
         suggestion: '<div></div>',
       };
-      DocsSearchBar.__Rewire__('templates', templates);
+      SearchBar.__Rewire__('templates', templates);
     });
     afterEach(() => {
-      DocsSearchBar.__ResetDependency__('templates');
+      SearchBar.__ResetDependency__('templates');
     });
     it('should return a function', () => {
       // Given
 
       // When
-      const actual = DocsSearchBar.getSuggestionTemplate();
+      const actual = SearchBar.getSuggestionTemplate();
 
       // Then
       expect(actual).toBeInstanceOf(Function);
@@ -1111,13 +1111,13 @@ describe('DocsSearchBar', () => {
         Hogan = {
           compile: sinon.stub().returns({ render }),
         };
-        DocsSearchBar.__Rewire__('Hogan', Hogan);
+        SearchBar.__Rewire__('Hogan', Hogan);
       });
       it('should compile the suggestion template', () => {
         // Given
 
         // When
-        DocsSearchBar.getSuggestionTemplate();
+        SearchBar.getSuggestionTemplate();
 
         // Then
         expect(Hogan.compile.calledOnce).toBe(true);
@@ -1125,7 +1125,7 @@ describe('DocsSearchBar', () => {
       });
       it('should call render on a Hogan template', () => {
         // Given
-        const actual = DocsSearchBar.getSuggestionTemplate();
+        const actual = SearchBar.getSuggestionTemplate();
 
         // When
         actual({ foo: 'bar' });

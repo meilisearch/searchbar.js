@@ -1,6 +1,6 @@
 {
   "name": "searchbar.js",
-  "version": "1.0.1",
+  "version": "0.1.0",
   "description": "Add search bar with a search-as-you-type experience to your documentation using MeiliSearch",
   "main": "dist/npm/index.js",
   "scripts": {
@@ -17,7 +17,7 @@
   ],
   "author": "MeiliSearch <bonjour@meilisearch.com> (https://github.com/meilisearch/)",
   "license": "MIT",
-  "repository": "meilisearch/docs-searchbar.js",
+  "repository": "meilisearch/searchbar.js",
   "devDependencies": {
     "autoprefixer": "9.1.1",
     "babel-cli": "6.26.0",
@@ -30,7 +30,6 @@
     "babel-preset-env": "1.7.0",
     "babel-preset-stage-3": "6.24.1",
     "cssnano": "4.1.10",
-    "jest": "23.6.0",
     "jsdom": "11.12.0",
     "json": "9.0.6",
     "live-server": "1.2.1",
@@ -40,7 +39,6 @@
     "postcss-cli": "6.1.2",
     "pretty-bytes-cli": "2.0.0",
     "semver": "6.0.0",
-    "sinon": "7.3.2",
     "uglify-js": "3.5.11",
     "webpack": "3.12.0",
     "webpack-cli": "3.3.2"

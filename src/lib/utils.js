@@ -121,7 +121,7 @@ const utils = {
       if (typeof key === 'string') {
         key = key.toLowerCase();
       }
-      // fix #171 the given data type of docsSearchBar hits might be conflict with the properties of the native Object,
+      // fix #171 the given data type of searchBar hits might be conflict with the properties of the native Object,
       // such as the constructor, so we need to do this check.
       if (!Object.prototype.hasOwnProperty.call(newCollection, key)) {
         newCollection[key] = [];
