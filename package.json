@@ -34,7 +34,7 @@
     "json": "9.0.6",
     "live-server": "1.2.1",
     "mversion": "2.0.0",
-    "node-sass": "4.12.0",
+    "node-sass": "7.0.0",
     "onchange": "4.1.0",
     "postcss-cli": "6.1.2",
     "pretty-bytes-cli": "2.0.0",
